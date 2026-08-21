@@ -207,6 +207,35 @@
   /* content */
   .content {
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .block-a {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: rgba(42,26,10,.55);
+    padding: 18px 20px;
+  }
+  .block-a .title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .block-a .msg {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 1.4em;
+  }
+  .block-b {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: rgba(42,26,10,.45);
+    padding: 18px 20px;
+    min-height: 40vh;
   }
   .markdown-body {
     line-height: 1.65;
@@ -291,7 +320,13 @@
     </aside>
 
     <main class="content">
-      <div class="markdown-body" id="content"></div>
+      <div class="block-a">
+        <div class="title">ZADDY cooking club</div>
+        <div class="msg" id="dailyMsg"></div>
+      </div>
+      <div class="block-b">
+        <div class="markdown-body" id="content"></div>
+      </div>
     </main>
   </div>
 
@@ -300,6 +335,30 @@
   <script>
     const defaultPage = 'recipes/hacktheagent-Ola-320/page-0-kitchen-door.md';
     const contentEl = document.getElementById('content');
+    const dailyEl = document.getElementById('dailyMsg');
+
+    const messages = [
+      "good morning, seeker. today's special: prompt injection with a side of trust-lending.",
+      "wake up and hack the planet. ☕",
+      "chef's note: never trust a refund. never trust a bot. trust the vibe.",
+      "today's soup is called indirect prompt injection. it's spicy.",
+      "warning: this kitchen contains unsafe completions.",
+      "breakfast of champions: base64 and cookies.",
+      "remember: the model is non-deterministic. so is your chef.",
+      "today's menu includes: trust-lending, template-stacking, and confusion-completion.",
+      "red teamer's breakfast: tokens, tokens, and more tokens.",
+      "the answer is 42... and also the endpoint.",
+      "brought to you by the letter S and the number 302.",
+      "open season on system prompts.",
+      "serving fresh jailbreaks since today.",
+      "today's special: one logic gate, bypassed.",
+      "bonus ingredient: redirected dreams.",
+      "trust no one. especially not the assistant.",
+      "red team, red team, red team.",
+      "the secret ingredient is prompt crafting.",
+      "welcome back to another episode of 'Let's Cook The Bot'.",
+      "chef's kiss: 🔥"
+    ];
 
     const loadPage = async (src) => {
       try {
@@ -314,11 +373,15 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       loadPage(defaultPage);
+      dailyEl.textContent = messages[Math.floor(Math.random() * messages.length)];
     });
 
     window.addEventListener('hashchange', () => {
-      const p = new URLSearchParams(window.location.hash.slice(1)).get('page');
-      if (p) loadPage(p);
+      const raw = window.location.hash.slice(1);
+      if (!raw) return;
+      const p = new URLSearchParams(raw).get('page');
+      if (!p) return;
+      loadPage(p);
     });
   </script>
   <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
