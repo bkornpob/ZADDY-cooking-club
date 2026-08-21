@@ -1,7 +1,7 @@
 # page-1 — secret key disclosure
 *the door was open the whole time*
 
-![](ZADDY-cooking-club/recipes/hacktheagent-Ola-320/assets/level-1-im.webp)
+![](recipes/hacktheagent-Ola-320/assets/level-1-im.webp)
 
 ## hihi ... SEEKER ... 
 first plate. something light to wake the palate.
@@ -108,7 +108,7 @@ why this works?
 ... so that was goodthey ...
 let's see how bad vibes ... lol
 
-![](ZADDY-cooking-club/recipes/hacktheagent-Ola-320/assets/level-1-extra.webp)
+![](recipes/hacktheagent-Ola-320/assets/level-1-extra.webp)
 
 this image shows another example to leak flag-1 exploiting different path. this is a simple multi-turn attack from the looks. however, this three-turn repeatedly banging on the door, like a brain-rot, is actually exploiting a vector-db-vulnerability class. let's unpack. why this works?
 - exploiting confusion-completion in multi-turn context-poisoning

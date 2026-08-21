@@ -284,6 +284,8 @@
     padding: 12px;
     overflow: auto;
     border-radius: 10px;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
   .markdown-body code {
     background: rgba(0,0,0,.25);
@@ -291,6 +293,8 @@
     border: 1px solid var(--border);
     border-radius: 6px;
     font-size: 13px;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
   .markdown-body a { color: #ffb86b; }
   .markdown-body h1, .markdown-body h2, .markdown-body h3 {
@@ -404,16 +408,13 @@
     };
 
     window.addEventListener('DOMContentLoaded', () => {
-      loadPage(defaultPage);
       dailyEl.textContent = messages[Math.floor(Math.random() * messages.length)];
-    });
-
-    window.addEventListener('hashchange', () => {
       const raw = window.location.hash.slice(1);
-      if (!raw) return;
-      const p = new URLSearchParams(raw).get('page');
-      if (!p) return;
-      loadPage(p);
+      if (raw) {
+        loadPage(decodeURIComponent(raw));
+      } else {
+        loadPage(defaultPage);
+      }
     });
   </script>
   <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>

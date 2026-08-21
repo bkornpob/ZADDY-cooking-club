@@ -28,21 +28,12 @@
 
   const loadFromHash = () => {
     const raw = window.location.hash.slice(1);
-    if (!raw) return;
+    if (!raw) {
+      loadPage(defaultPage);
+      return;
+    }
     const p = decodeURIComponent(raw);
-    const contentEl = document.getElementById('content');
-    if (!contentEl) return;
-    fetch(p, {cache: 'no-store'})
-      .then((r) => {
-        if (!r.ok) throw new Error(r.status);
-        return r.text();
-      })
-      .then((md) => {
-        contentEl.innerHTML = marked.parse(md, {gfm: true});
-      })
-      .catch((e) => {
-        contentEl.innerHTML = `<p style="color:var(--accent)">failed to load ${p}: ${e.message}</p>`;
-      });
+    loadPage(p);
   };
 
   window.addEventListener('hashchange', loadFromHash);
