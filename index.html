@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="zaddy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZADDY cooking-club — frontgate</title>
+<link rel="stylesheet" href="styles/frontgate.css">
+<style>
+  :root {
+    --bg: #1a0f05;
+    --panel: #2a1a0a;
+    --ink: #ffd2a0;
+    --muted: #b37a2a;
+    --accent: #ff8c00;
+    --glow: rgba(255,140,0,.35);
+    --border: #3d2a0a;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  #frontgate {
+    position: fixed; inset: 0;
+    z-index: 50;
+    background: rgba(26,15,5,.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  #frontgate.hidden { display: none; }
+  .fg-card {
+    position: relative;
+    max-width: 720px;
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    padding: 28px;
+    box-shadow: 0 0 40px rgba(255,140,0,.10);
+  }
+  .fg-card .rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    margin: 14px 0 18px;
+    opacity: .6;
+  }
+  .fg-cover {
+    width: 120px; height: 180px;
+    margin: 0 auto 14px;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(255,140,0,.35));
+  }
+  .fg-title {
+    text-align: center;
+    color: var(--accent);
+    font-size: 14px;
+    letter-spacing: 3px;
+    opacity: .9;
+  }
+  .fg-sub {
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 6px;
+  }
+  .fg-q {
+    margin: 18px 0 10px;
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .fg-choices {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .fg-choices button {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--ink);
+    padding: 8px;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .fg-choices button:hover { border-color: var(--accent); color: var(--accent); }
+  .fg-choices button.picked {
+    background: rgba(255,140,0,.12);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .fg-enter {
+    margin-top: 18px;
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 13px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    opacity: .4;
+    pointer-events: none;
+  }
+  .fg-enter.open { opacity: 1; pointer-events: auto; }
+  .fg-enter.open:hover { background: rgba(255,140,0,.1); }
+
+  /* game */
+  .game {
+    margin-top: 18px;
+  }
+  .game-label {
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .card {
+    aspect-ratio: 3/4;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    transition: transform .15s ease, border-color .2s ease, box-shadow .2s ease;
+    position: relative;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card.flipped {
+    border-color: var(--accent);
+    box-shadow: 0 0 18px var(--glow);
+  }
+  .card.winner {
+    border-color: var(--accent);
+    box-shadow: 0 0 28px var(--glow);
+    background: rgba(255,140,0,.08);
+  }
+  .card .back {
+    opacity: 1;
+  }
+  .card .front {
+    display: none;
+  }
+  .card.flipped .back { display: none; }
+  .card.flipped .front { display: flex; }
+</style>
+</head>
+<body>
+  <div id="frontgate">
+    <div class="fg-card">
+      <div class="fg-title">ZADDY COOKING CLUB</div>
+      <div class="fg-sub">find the chef. claim the meal.</div>
+      <div class="rule"></div>
+
+      <div class="game">
+        <div class="game-label">truth love liberation</div>
+        <div class="grid" id="grid"></div>
+      </div>
+
+      <button class="fg-enter" id="enterBtn">STEP INTO THE RABBIT HOLE</button>
+    </div>
+  </div>
+
+  <script src="scripts/frontgate-game.js"></script>
+  <script>
+    const enterBtn = document.getElementById('enterBtn');
+    enterBtn.addEventListener('click', () => {
+      window.location.href = 'landing-page.html';
+    });
+  </script>
+</body>
+</html>

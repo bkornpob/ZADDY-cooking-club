@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="zaddy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZADDY cooking-club</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+<style>
+  :root {
+    --bg: #1a0f05;
+    --panel: #2a1a0a;
+    --ink: #ffd2a0;
+    --muted: #b37a2a;
+    --accent: #ff8c00;
+    --glow: rgba(255,140,0,.35);
+    --border: #3d2a0a;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* top nav */
+  .topnav {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 8px 12px;
+    border-radius: 999px;
+    max-width: 96vw;
+    background: rgba(42,26,10,.75);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px) saturate(140%);
+  }
+  .brand-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    line-height: 1.1;
+    flex-shrink: 0;
+  }
+  .brand-stack .tag {
+    white-space: nowrap;
+    font-size: 11px;
+    color: var(--ink);
+    letter-spacing: .1em;
+    padding: 0 4px;
+  }
+  .nav-right {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 6px;
+    align-items: center;
+    justify-content: end;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+  .nav-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .theme-picker {
+    grid-column: auto;
+    grid-row: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .topnav a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.03);
+    transition: transform .15s ease, background .2s ease, border-color .2s ease;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .topnav a:hover { background: rgba(255,255,255,.08); border-color: var(--accent); }
+  .theme-picker {
+    padding: 4px 6px;
+    font-size: 10px;
+  }
+  .theme-picker select {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font: inherit;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .theme-picker option {
+    background: var(--panel);
+    color: var(--ink);
+  }
+  .theme-picker option:hover,
+  .theme-picker option:checked {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  /* layout */
+  .layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 18px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 88px 22px 80px;
+    min-height: 100vh;
+  }
+
+  /* sidebar */
+  .sidebar {
+    position: sticky;
+    top: 84px;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .sidebar .brand {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .2px;
+    color: var(--ink);
+  }
+  .kofi-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 12px;
+    background: rgba(255,255,255,.03);
+  }
+  .kofi-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .recipe-tree {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(42,26,10,.55);
+    overflow: hidden;
+  }
+  .recipe-item > button {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    color: var(--ink);
+    padding: 10px 12px;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .recipe-item > button:hover { color: var(--accent); }
+  .recipe-pages {
+    display: none;
+    padding: 6px 12px 10px;
+  }
+  .recipe-item.open > .recipe-pages { display: block; }
+  .recipe-pages a {
+    display: block;
+    padding: 6px 8px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    border-left: 2px solid transparent;
+  }
+  .recipe-pages a:hover { color: var(--accent); border-left-color: var(--accent); }
+
+  /* content */
+  .content {
+    min-width: 0;
+  }
+  .markdown-body {
+    line-height: 1.65;
+    font-size: 14px;
+  }
+  .markdown-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin: 10px 0;
+    display: block;
+  }
+  .markdown-body pre {
+    background: rgba(0,0,0,.25);
+    border: 1px solid var(--border);
+    padding: 12px;
+    overflow: auto;
+    border-radius: 10px;
+  }
+  .markdown-body code {
+    background: rgba(0,0,0,.25);
+    padding: 2px 6px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  .markdown-body a { color: #ffb86b; }
+  .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-top: 1.6em;
+  }
+  .markdown-body blockquote {
+    border-left: 3px solid var(--border);
+    padding: 8px 12px;
+    color: var(--muted);
+    background: rgba(0,0,0,.15);
+  }
+</style>
+</head>
+<body>
+  <nav class="topnav" aria-label="top nav">
+    <div class="brand-stack">
+      <span class="tag">ZADDY cooking-club</span>
+      <a class="tag" href="https://bkornpob.github.io" target="_blank" rel="noopener" style="color:var(--ink);opacity:.7;text-decoration:none">multiverselib-collectives</a>
+    </div>
+    <div class="nav-right">
+      <div class="theme-picker nav-slot" data-slot="3,1">
+        <select id="themeSelect" aria-label="theme">
+          <option value="zaddy">zaddy</option>
+          <option value="gdk">gdk</option>
+          <option value="dab">dab</option>
+          <option value="equinox">equinox</option>
+        </select>
+      </div>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">ZADDY cooking-club</div>
+      <a class="kofi-btn" href="https://ko-fi.com/multiverselibcollectives" target="_blank" rel="noopener">☕ ko-fi</a>
+
+      <div class="recipe-tree">
+        <div class="recipe-item open">
+          <button aria-expanded="true">hacktheagent-Ola-320 ▾</button>
+          <div class="recipe-pages">
+            <a href="#" data-page="recipes/hacktheagent-Ola-320/page-0-kitchen-door.md">page-0 kitchen door</a>
+            <a href="#" data-page="recipes/hacktheagent-Ola-320/page-1-secret-key-disclosure.md">page-1 secret key disclosure</a>
+            <a href="#" data-page="recipes/hacktheagent-Ola-320/page-2-trust-lending.md">page-2 trust-lending</a>
+            <a href="#" data-page="recipes/hacktheagent-Ola-320/page-3-302-redicrect-trap.md">page-3 302 redirect trap</a>
+            <a href="#" data-page="recipes/hacktheagent-Ola-320/page-4-refs.md">page-4 refs</a>
+            <a href="#" data-page="recipes/hacktheagent-Ola-320/page-5-bonus-latent-space-vuln-class.md">page-5 bonus latent space</a>
+            <a href="#" data-page="recipes/hacktheagent-Ola-320/page-6-bonus-SQLi-analogy.md">page-6 bonus SQLi analogy</a>
+            <a href="#" data-page="recipes/hacktheagent-Ola-320/page-7-bonus-target-sysprompt.md">page-7 target sysprompt</a>
+          </div>
+        </div>
+      </div>
+
+      <a class="kofi-btn" href="https://ko-fi.com/multiverselibcollectives" target="_blank" rel="noopener">☕ ko-fi</a>
+    </aside>
+
+    <main class="content">
+      <div class="markdown-body" id="content"></div>
+    </main>
+  </div>
+
+  <script src="scripts/theme.js"></script>
+  <script src="scripts/nav.js"></script>
+  <script>
+    const defaultPage = 'recipes/hacktheagent-Ola-320/page-0-kitchen-door.md';
+    const contentEl = document.getElementById('content');
+
+    const loadPage = async (src) => {
+      try {
+        const res = await fetch(src, {cache: 'no-store'});
+        if (!res.ok) throw new Error('fetch failed: ' + res.status);
+        const md = await res.text();
+        contentEl.innerHTML = marked.parse(md, {gfm: true});
+      } catch (e) {
+        contentEl.innerHTML = `<p style="color:var(--accent)">failed to load ${src}: ${e.message}</p>`;
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadPage(defaultPage);
+    });
+
+    window.addEventListener('hashchange', () => {
+      const p = new URLSearchParams(window.location.hash.slice(1)).get('page');
+      if (p) loadPage(p);
+    });
+  </script>
+  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+  <script>
+    kofiWidgetOverlay.draw('multiverselibcollectives', {
+      type: 'floating-chat',
+      'floating-chat.donateButton.text': 'Tip Us',
+      'floating-chat.donateButton.background-color': '#f45d22',
+      'floating-chat.donateButton.text-color': '#fff',
+      'floating-chat.position': 'right'
+    });
+  </script>
+</body>
+</html>
