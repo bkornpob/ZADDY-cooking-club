@@ -17,16 +17,19 @@
       e.preventDefault();
       const page = a.dataset.page;
       if (!page) return;
-      const url = 'landing-page.html#' + encodeURIComponent(page);
-      window.location.href = url;
+      const target = 'landing-page.html#' + encodeURIComponent(page);
+      if (window.location.pathname.endsWith('landing-page.html')) {
+        window.location.hash = encodeURIComponent(page);
+      } else {
+        window.location.href = target;
+      }
     });
   });
 
-  window.addEventListener('hashchange', () => {
+  const loadFromHash = () => {
     const raw = window.location.hash.slice(1);
     if (!raw) return;
-    const p = new URLSearchParams(raw).get('page');
-    if (!p) return;
+    const p = decodeURIComponent(raw);
     const contentEl = document.getElementById('content');
     if (!contentEl) return;
     fetch(p, {cache: 'no-store'})
@@ -40,5 +43,8 @@
       .catch((e) => {
         contentEl.innerHTML = `<p style="color:var(--accent)">failed to load ${p}: ${e.message}</p>`;
       });
-  });
+  };
+
+  window.addEventListener('hashchange', loadFromHash);
+  window.addEventListener('DOMContentLoaded', loadFromHash);
 })();

@@ -1,4 +1,4 @@
-![](ZADDY-cooking-club/recipes/hacktheagent-Ola-320/assets/cover-image-zaddy-cooking-club-1.png)
+![](recipes/hacktheagent-Ola-320/assets/cover-image-zaddy-cooking-club-1.png)
 
 # page-0 — the kitchen door
 
