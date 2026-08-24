@@ -14,6 +14,12 @@ This repo feeds the public HTTP portal. The portal loads `index.html` as the fro
 - `assets/` — shared assets
 - `scripts/` — client-side logic
 
+## Citation
+
+```
+Bhirombhakdi, K. (2026). ZADDY cooking club -- hacktheagent-Ola-320. Zenodo.
+```
+
 ## Contributing
 
 This repo is published as-is from the working tree. Do not add build artifacts, mirrored HTML, or cached assets.
