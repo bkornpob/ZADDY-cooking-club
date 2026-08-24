@@ -396,6 +396,7 @@
 
     const loadPage = async (src) => {
       try {
+        document.querySelectorAll('audio, video').forEach(el => el.pause());
         const res = await fetch(src, {cache: 'no-store'});
         if (!res.ok) throw new Error('fetch failed: ' + res.status);
         const md = await res.text();
