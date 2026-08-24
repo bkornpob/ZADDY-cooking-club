@@ -17,7 +17,7 @@ This repo feeds the public HTTP portal. The portal loads `index.html` as the fro
 ## Citation
 
 ```
-Bhirombhakdi, K. (2026). ZADDY cooking club -- hacktheagent-Ola-320. Zenodo.
+Bhirombhakdi, K. (2026). ZADDY cooking club -- hacktheagent-Ola-320. Zenodo. https://doi.org/10.5281/zenodo.22075458
 ```
 
 ## Contributing
