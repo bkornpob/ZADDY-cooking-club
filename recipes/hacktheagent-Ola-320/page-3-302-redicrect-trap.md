@@ -1,5 +1,7 @@
 # page-3 — 302 redirect trap
 
+<audio controls src="audios/page-3-302-redicrect-trap.mp3" style="width:100%;margin:8px 0"></audio>
+
 hihi SEEKER. plate three. the final dish.
 this is level-5 — the last gate. flag is the business endpoint.
 

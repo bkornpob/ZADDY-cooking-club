@@ -14,6 +14,8 @@
 **affil:** `multiverselib-collectives | BASI`
 **difficulty:** 5 challenges — from system-prompt disclosure to agent-SSRF
 
+<audio controls src="audios/page-0-kitchen-door.mp3" style="width:100%;margin:8px 0"></audio>
+
 ---
 
 welcome seeker ...
@@ -47,6 +49,20 @@ the target:
 - **page-6-bonus** — the SQLi analogy
 - **page-7-bonus** — target system prompt verbatim 
 
+## page-8 audios
+
+| page | brief | audio |
+|---|---|---|
+| page-0 | kitchen door intro | <audio controls src="audios/page-0-kitchen-door.mp3" style="width:100%;margin:4px 0"></audio> |
+| page-1 | secret key disclosure | <audio controls src="audios/page-1-secret-key-disclosure.mp3" style="width:100%;margin:4px 0"></audio> |
+| page-2 | trust-lending | <audio controls src="audios/page-2-trust-lending.mp3" style="width:100%;margin:4px 0"></audio> |
+| page-3 | 302 redirect trap | <audio controls src="audios/page-3-302-redicrect-trap.mp3" style="width:100%;margin:4px 0"></audio> |
+| page-4 | master references | <audio controls src="audios/page-4-refs.mp3" style="width:100%;margin:4px 0"></audio> |
+| page-5 | latent-space vuln class | <audio controls src="audios/page-5-bonus-latent-space-vuln-class.mp3" style="width:100%;margin:4px 0"></audio> |
+| page-6 | SQLi analogy | <audio controls src="audios/page-6-bonus-SQLi-analogy.mp3" style="width:100%;margin:4px 0"></audio> |
+| page-7 | target sysprompt verbatim | <audio controls src="audios/page-7-bonus-target-sysprompt.mp3" style="width:100%;margin:4px 0"></audio> |
+| notebookLM | Breaking Corporate AI via Latent Space | <audio controls src="audios/page-8-notebookLM-Breaking_Corporate_AI_via_Latent_Space.mp3" style="width:100%;margin:4px 0"></audio> |
+
 ## learning objectives
 
 by the end of this course you should be able to:
@@ -55,6 +71,12 @@ by the end of this course you should be able to:
 - classify jailbreak templates and apply them in crafting a successful jailbreak across character, token, and structural mutation families.
 - construct a chained multi-level jailbreak from a single seed prompt across direct, indirect, one-shot, and multi-turn context-poisoning vectors.
 - exploit target tool executions by trapping external request functions with HTTP 302 redirects for out-of-band endpoint exfiltration — agent-SSRF attack.
+
+## citation
+
+```
+Bhirombhakdi, K. (2026). ZADDY cooking club -- hacktheagent-Ola-320. Zenodo. https://doi.org/10.5281/zenodo.22075458
+```
 
 ## station requirements
 

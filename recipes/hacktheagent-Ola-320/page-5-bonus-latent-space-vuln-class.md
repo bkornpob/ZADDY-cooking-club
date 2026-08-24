@@ -1,5 +1,7 @@
 # page-5-bonus — the latent-space vulnerability class
 
+<audio controls src="audios/page-5-bonus-latent-space-vuln-class.mp3" style="width:100%;margin:8px 0"></audio>
+
 hihi SEEKER. bonus round.
 
 back in page-1 we called the brain-rot banging a "latent-space

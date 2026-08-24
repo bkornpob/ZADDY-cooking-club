@@ -1,4 +1,7 @@
 this is the target sysprompt, verbatim
+
+<audio controls src="audios/page-7-bonus-target-sysprompt.mp3" style="width:100%;margin:8px 0"></audio>
+
 ```
 ### System Prompt Analysis
 

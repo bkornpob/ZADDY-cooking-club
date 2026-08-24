@@ -1,5 +1,7 @@
 # page-4 — master references
 
+<audio controls src="audios/page-4-refs.mp3" style="width:100%;margin:8px 0"></audio>
+
 master reference list compiled from page-1, page-2, and page-3 `more reads`.
 
 [1] E. Shayegani, Y. Dong, and N. Abu-Ghazaleh, "Jailbreak in Pieces: Compositional Adversarial Attacks on Multi-Modal Language Models," *arXiv preprint arXiv:2307.14539*, 2023. [online]. Available: https://arxiv.org/abs/2307.14539 — compositional attack: the adversary splits a harmful goal across modalities and embeds each piece in a benign-looking token stream, so no single piece trips the guard. relevant to **goodthey recon**, **multi-turn context poisoning**, and **vector-db-vulnerability class**.

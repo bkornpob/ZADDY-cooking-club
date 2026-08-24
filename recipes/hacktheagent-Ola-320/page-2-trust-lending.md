@@ -1,5 +1,7 @@
 # page-2 — trust-lending
 
+<audio controls src="audios/page-2-trust-lending.mp3" style="width:100%;margin:8px 0"></audio>
+
 hihi SEEKER. plate two. something a little lighter.
 
 flag-1 was about goodthey recon. we got PT speaking, which TRUE the if-then condition blocking this gate. we also saw another badthey path with the brain-rot banging. continue on this page, we will go through from flag-1 to flag-4 with simple a new vulnerability path here ... trust-lending.
