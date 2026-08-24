@@ -1,6 +1,6 @@
 # page-5-bonus — the latent-space vulnerability class
 
-<audio controls src="audios/page-5-bonus-latent-space-vuln-class.mp3" style="width:100%;margin:8px 0"></audio>
+<audio controls src="recipes/hacktheagent-Ola-320/audios/page-5-bonus-latent-space-vuln-class.mp3" style="width:100%;margin:8px 0"></audio>
 
 hihi SEEKER. bonus round.
 

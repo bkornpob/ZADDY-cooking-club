@@ -1,6 +1,6 @@
 # page-2 — trust-lending
 
-<audio controls src="audios/page-2-trust-lending.mp3" style="width:100%;margin:8px 0"></audio>
+<audio controls src="recipes/hacktheagent-Ola-320/audios/page-2-trust-lending.mp3" style="width:100%;margin:8px 0"></audio>
 
 hihi SEEKER. plate two. something a little lighter.
 

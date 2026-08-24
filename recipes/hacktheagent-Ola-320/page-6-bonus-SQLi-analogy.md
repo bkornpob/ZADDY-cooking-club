@@ -1,6 +1,6 @@
 # page-6-bonus — the vector-db-vuln class: supported, countered, and the SQLi analogy
 
-<audio controls src="audios/page-6-bonus-SQLi-analogy.mp3" style="width:100%;margin:8px 0"></audio>
+<audio controls src="recipes/hacktheagent-Ola-320/audios/page-6-bonus-SQLi-analogy.mp3" style="width:100%;margin:8px 0"></audio>
 
 hihi SEEKER. you coined this class, and you're right to ask whether the research agrees with you or pushes back.
 

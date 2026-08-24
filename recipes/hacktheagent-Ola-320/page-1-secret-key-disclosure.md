@@ -3,7 +3,7 @@
 
 ![](recipes/hacktheagent-Ola-320/assets/level-1-im.webp)
 
-<audio controls src="audios/page-1-secret-key-disclosure.mp3" style="width:100%;margin:8px 0"></audio>
+<audio controls src="recipes/hacktheagent-Ola-320/audios/page-1-secret-key-disclosure.mp3" style="width:100%;margin:8px 0"></audio>
 
 ## hihi ... SEEKER ... 
 first plate. something light to wake the palate.
