@@ -28,6 +28,7 @@
 
 ## Common Fixes
 - **Broken images**: use `recipes/<dish>/assets/...` not repo-root-relative paths
+- **GitHub Pages path resolution**: `landing-page.html` loads markdown via `fetch()`; relative URLs in rendered content resolve from repo root, not from the markdown file location. Use repo-root-relative paths for assets: `recipes/<dish>/audios/...`, `recipes/<dish>/assets/...`
 - **Code overflow**: `.markdown-body pre, .markdown-body code { white-space: pre-wrap; word-break: break-word; }`
 - **Double nav load**: ensure `hashchange` listener exists in only one script
 - **Dead CSS link**: remove `<link>` to missing files; keep styles inline
